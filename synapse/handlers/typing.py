@@ -43,7 +43,7 @@ class TypingNotificationHandler(BaseHandler):
 
         self.federation = hs.get_replication_layer()
 
-        self.federation.register_edu_handler("m.typing", self._recv_edu)
+        #self.federation.register_edu_handler("m.typing", self._recv_edu)
 
         hs.get_distributor().observe("user_left_room", self.user_left_room)
 
