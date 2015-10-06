@@ -90,45 +90,45 @@ class PresenceHandler(BaseHandler):
 
         distributor.observe("user_joined_room", self.user_joined_room)
 
-        distributor.declare("collect_presencelike_data")
+        #distributor.declare("collect_presencelike_data")
 
-        distributor.declare("changed_presencelike_data")
-        distributor.observe(
-            "changed_presencelike_data", self.changed_presencelike_data
-        )
+        #distributor.declare("changed_presencelike_data")
+        #distributor.observe(
+        #    "changed_presencelike_data", self.changed_presencelike_data
+        #)
 
         # outbound signal from the presence module to advertise when a user's
         # presence has changed
-        distributor.declare("user_presence_changed")
+        #distributor.declare("user_presence_changed")
 
         self.distributor = distributor
 
         self.federation = hs.get_replication_layer()
 
-        self.federation.register_edu_handler(
-            "m.presence", self.incoming_presence
-        )
-        self.federation.register_edu_handler(
-            "m.presence_invite",
-            lambda origin, content: self.invite_presence(
-                observed_user=UserID.from_string(content["observed_user"]),
-                observer_user=UserID.from_string(content["observer_user"]),
-            )
-        )
-        self.federation.register_edu_handler(
-            "m.presence_accept",
-            lambda origin, content: self.accept_presence(
-                observed_user=UserID.from_string(content["observed_user"]),
-                observer_user=UserID.from_string(content["observer_user"]),
-            )
-        )
-        self.federation.register_edu_handler(
-            "m.presence_deny",
-            lambda origin, content: self.deny_presence(
-                observed_user=UserID.from_string(content["observed_user"]),
-                observer_user=UserID.from_string(content["observer_user"]),
-            )
-        )
+        #self.federation.register_edu_handler(
+        #    "m.presence", self.incoming_presence
+        #)
+        #self.federation.register_edu_handler(
+        #    "m.presence_invite",
+        #    lambda origin, content: self.invite_presence(
+        #        observed_user=UserID.from_string(content["observed_user"]),
+        #        observer_user=UserID.from_string(content["observer_user"]),
+        #    )
+        #)
+        #self.federation.register_edu_handler(
+        #    "m.presence_accept",
+        #    lambda origin, content: self.accept_presence(
+        #        observed_user=UserID.from_string(content["observed_user"]),
+        #        observer_user=UserID.from_string(content["observer_user"]),
+        #    )
+        #)
+        #self.federation.register_edu_handler(
+        #    "m.presence_deny",
+        #    lambda origin, content: self.deny_presence(
+        #        observed_user=UserID.from_string(content["observed_user"]),
+        #        observer_user=UserID.from_string(content["observer_user"]),
+        #    )
+        #)
 
         # IN-MEMORY store, mapping local userparts to sets of local users to
         # be informed of state changes.
